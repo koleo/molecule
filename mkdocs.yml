@@ -1,0 +1,68 @@
+site_name: Ansible Molecule
+site_url: https://molecule.readthedocs.io/
+repo_url: https://github.com/ansible-community/molecule
+
+theme:
+  name: "material"
+  features:
+    - content.code.copy
+    - content.action.edit
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/ansible-community/molecule
+# nav:
+#   - home: index.md
+#   # - subprocess-tee: '!import https://github.com/pycontribs/subprocess-tee?branch=main&multi_docs=False'
+#   # - xxx: '!import https://github.com/eclipse-opensmartclide/smartclide-docs'
+
+plugins:
+  - autorefs
+  - multirepo:
+      cleanup: false
+
+      temp_dir: multirepo_imports
+  - search
+  - social
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            # Sphinx is for historical reasons, but we could consider switching if needed
+            # https://mkdocstrings.github.io/griffe/docstrings/
+            docstring_style: sphinx
+            merge_init_into_class: yes
+            show_submodules: yes
+          import:
+            - https://docs.ansible.com/ansible/latest/objects.inv
+            - https://virtualenv.pypa.io/en/latest/objects.inv
+            - https://yamllint.readthedocs.io/en/latest/objects.inv
+            - https://jinja.palletsprojects.com/objects.inv
+            - https://pip.pypa.io/en/latest/objects.inv
+            - https://docs.python.org/3/objects.inv
+            - https://testinfra.readthedocs.io/en/latest/objects.inv
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+markdown_extensions:
+  - admonition
+  - def_list
+  - footnotes
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+      social_url_shortener: true
+      user: facelessuser
+      repo: pymdown-extensions
+      normalize_issue_symbols: true
+  - markdown_include.include:
+      base_path: docs
+  - pymdownx.tabbed:
+      alternate_style: true
